@@ -70,6 +70,10 @@ function displayInfo(){
 
 const debtError = document.querySelector("#advance-debt");
 const notEnoughUnitsError = document.querySelector("#enough-units-error");
+const usageOptionError = document.querySelector("#usage-option");
+const topupOptionError = document.querySelector("#topup-option");
+
+
 
 function topupBtnClicked(){
     const topUpRadio = document.querySelector(".topup:checked") ; // * my top-up options
@@ -84,13 +88,14 @@ function topupBtnClicked(){
                 }, 4000)
             }
             electricity.topUpElectricity(topUpRadio.value) ;
-
-          
-            
+ 
         }
  
     }else{
-        alert("top up option blank")
+        topupOptionError.style.display = "block"
+        setTimeout(function(){
+            topupOptionError.style.display = "none"
+        }, 4000)
     }
 
     displayInfo()
@@ -109,7 +114,10 @@ function useNowBtnClicked(){
             }, 4000)
         }
     }else{
-        alert("select usage option")
+        usageOptionError.style.display = "block"
+        setTimeout(function(){
+            usageOptionError.style.display = "none"
+        }, 4000)
     }
 
     displayInfo()
