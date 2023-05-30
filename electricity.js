@@ -53,7 +53,7 @@ function Electricity(availUnits, unitsTotal, amountTotal, advanceAmount) {
                 unitsAvailable += unitsPrice[amount];
             }
         }
-
+        // increment the money spent and units
         if (amount != "advance") {
             theTotalAmountSpent += amount;
             theTotalUnitsBought += unitsPrice[amount];
@@ -69,6 +69,7 @@ function Electricity(availUnits, unitsTotal, amountTotal, advanceAmount) {
      * other wise return false and do nothing.
      */
     function useAppliance(appliance) {
+        // if appliance cost exceeds the balance, then do not use the appliance
         if (unitsAvailable >= appliances[appliance]) {
             unitsAvailable -= appliances[appliance];
             return true;
@@ -76,7 +77,7 @@ function Electricity(availUnits, unitsTotal, amountTotal, advanceAmount) {
             return false;
         }
     }
-
+    //  checking if the use has outstanding debt
     function advanceTaken() {
         if (advancedAmount > 0) {
             return true;
@@ -85,13 +86,16 @@ function Electricity(availUnits, unitsTotal, amountTotal, advanceAmount) {
         }
     }
 
+    // returning the total money spent
     function totalAmountSpent() {
         return theTotalAmountSpent;
     }
 
+    //  returning total units
     function totalUnitsBought() {
         return theTotalUnitsBought;
     }
+    //  returning advance money
     function totalAdvancedAmount(){
         return advancedAmount;
     }

@@ -42,11 +42,12 @@ unitsAvailableElem.innerHTML = electricity.getUnitsAvailable() ;
 totalUnitsBoughtElem.innerHTML = electricity.totalUnitsBought() ;
 totalAmountSpentElem.innerHTML = electricity.totalAmountSpent() ;
 
+// if advance money is not payed, show the green tick
 if(electricity.advanceTaken()){
     advanceTakenElem.classList.remove("hidden")
 }
 
-
+// The function for displaying the info
 function displayInfo(){
     unitsAvailableElem.innerHTML = electricity.getUnitsAvailable() ;
     totalUnitsBoughtElem.innerHTML = electricity.totalUnitsBought() ;
@@ -60,6 +61,7 @@ function displayInfo(){
         advanceTakenElem.classList.add("hidden")
     }
 
+    // Pushing my totals to local storage
     localStorage["availUnits"] = JSON.parse(electricity.getUnitsAvailable())  ;
     localStorage["unitsTotal"] = electricity.totalUnitsBought() ;
     localStorage["amountTotal"] = electricity.totalAmountSpent() ;
@@ -68,13 +70,14 @@ function displayInfo(){
 
 }
 
+// ************************* Error messages elements *************************************
 const debtError = document.querySelector("#advance-debt");
 const notEnoughUnitsError = document.querySelector("#enough-units-error");
 const usageOptionError = document.querySelector("#usage-option");
 const topupOptionError = document.querySelector("#topup-option");
 
 
-
+// function for when the top up button is triggered
 function topupBtnClicked(){
     const topUpRadio = document.querySelector(".topup:checked") ; // * my top-up options
     if(topUpRadio){
@@ -102,6 +105,7 @@ function topupBtnClicked(){
 }
 
 
+//  function for when th usage button is clicked
 function useNowBtnClicked(){
     const usageRadio = document.querySelector(".usage:checked"); // * my use appliances options
     if(usageRadio){
