@@ -14,32 +14,37 @@ const useNowBtn = document.querySelector(".useNow");
 let availUnits = 0;
 let unitsTotal = 0;
 let amountTotal = 0 ;
+let advanceAmount = 0
 
 
 if(localStorage["availUnits"]){
-    availUnits = localStorage["availUnits"] ;
+    availUnits =  Number(localStorage["availUnits"])  ;
 }
 if(localStorage["unitsTotal"]){
-    unitsTotal = localStorage["unitsTotal"] ;
+    unitsTotal = Number(localStorage["unitsTotal"])  ;
 }
 if(localStorage["amountTotal"]){
-    amountTotal = localStorage["amountTotal"] ;
+    amountTotal = Number(localStorage["amountTotal"])  ;
+}
+
+if(localStorage["advanceAmount"]){
+    advanceAmount = Number(localStorage["advanceAmount"])  ;
 }
 
 //  ********************************************
 
 
 // Factory Function instance 
-const electricity =  Electricity(availUnits, unitsTotal, amountTotal);
+const electricity =  Electricity(availUnits, unitsTotal, amountTotal, advanceAmount);
 
 
 unitsAvailableElem.innerHTML = electricity.getUnitsAvailable() ;
 totalUnitsBoughtElem.innerHTML = electricity.totalUnitsBought() ;
 totalAmountSpentElem.innerHTML = electricity.totalAmountSpent() ;
 
-
-
-
+if(electricity.advanceTaken()){
+    advanceTakenElem.classList.remove("hidden")
+}
 
 
 function displayInfo(){
@@ -51,11 +56,16 @@ function displayInfo(){
 
     if(electricity.advanceTaken()){
         advanceTakenElem.classList.remove("hidden")
+    }else{
+        advanceTakenElem.classList.add("hidden")
     }
 
-    localStorage["availUnits"] = electricity.getUnitsAvailable() ;
+    localStorage["availUnits"] = JSON.parse(electricity.getUnitsAvailable())  ;
     localStorage["unitsTotal"] = electricity.totalUnitsBought() ;
     localStorage["amountTotal"] = electricity.totalAmountSpent() ;
+
+    localStorage["advanceAmount"] = electricity.totalAdvancedAmount() ;
+
 }
 
 
