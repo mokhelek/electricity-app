@@ -9,8 +9,37 @@ const advanceTakenElem = document.querySelector(".advanceTaken") ;
 const topupNowBtn = document.querySelector(".topupNow");
 const useNowBtn = document.querySelector(".useNow");
 
+
+// *************** local storage ************************
+let availUnits = 0;
+let unitsTotal = 0;
+let amountTotal = 0 ;
+
+
+if(localStorage["availUnits"]){
+    availUnits = localStorage["availUnits"] ;
+}
+if(localStorage["unitsTotal"]){
+    unitsTotal = localStorage["unitsTotal"] ;
+}
+if(localStorage["amountTotal"]){
+    amountTotal = localStorage["amountTotal"] ;
+}
+
+//  ********************************************
+
+
 // Factory Function instance 
-const electricity =  Electricity();
+const electricity =  Electricity(availUnits, unitsTotal, amountTotal);
+
+
+unitsAvailableElem.innerHTML = electricity.getUnitsAvailable() ;
+totalUnitsBoughtElem.innerHTML = electricity.totalUnitsBought() ;
+totalAmountSpentElem.innerHTML = electricity.totalAmountSpent() ;
+
+
+
+
 
 
 function displayInfo(){
@@ -23,12 +52,16 @@ function displayInfo(){
     if(electricity.advanceTaken()){
         advanceTakenElem.classList.remove("hidden")
     }
+
+    localStorage["availUnits"] = electricity.getUnitsAvailable() ;
+    localStorage["unitsTotal"] = electricity.totalUnitsBought() ;
+    localStorage["amountTotal"] = electricity.totalAmountSpent() ;
 }
 
 
 function topupBtnClicked(){
-    const topUpRadio = document.querySelector(".topup:checked"); // * my top-up options
-    if(topUpRadio.value){
+    const topUpRadio = document.querySelector(".topup:checked") ; // * my top-up options
+    if(topUpRadio){
         if(topUpRadio.value != "advance"){
             electricity.topUpElectricity(Number(topUpRadio.value)) ;
         }else{
@@ -45,7 +78,7 @@ function topupBtnClicked(){
 
 function useNowBtnClicked(){
     const usageRadio = document.querySelector(".usage:checked"); // * my use appliances options
-    if(usageRadio.value){
+    if(usageRadio){
         electricity.useAppliance(usageRadio.value) ;
     }else{
         alert("select usage option")

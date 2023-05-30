@@ -1,4 +1,4 @@
-function Electricity() {
+function Electricity(availUnits, unitsTotal, amountTotal) {
     // do we want to go with this or array?
     let appliances = {
         Stove: 10,
@@ -15,12 +15,12 @@ function Electricity() {
         advance: 21,
     };
 
-    let unitsAvailable = 0; // total units available
+    let unitsAvailable = availUnits || 0; // total units available
 
     let advancedAmount = 0; // * This should be money, not units
 
-    let theTotalAmountSpent = 0;
-    let theTotalUnitsBought = 0;
+    let theTotalAmountSpent = amountTotal || 0;
+    let theTotalUnitsBought = unitsTotal || 0;
 
     function topUpElectricity(amount) {
         /*
