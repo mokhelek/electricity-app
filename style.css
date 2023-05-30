@@ -57,3 +57,12 @@ button {
 	}
 }
 
+.error-message{
+	margin-bottom: 1rem;
+	padding: 1rem;
+	text-align: center;
+	border: 2px red solid;
+	background-color: orange;
+	font-size: 0.9rem;
+	display: none;
+}

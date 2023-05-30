@@ -68,6 +68,7 @@ function displayInfo(){
 
 }
 
+const debtError = document.querySelector("#advance-debt");
 
 function topupBtnClicked(){
     const topUpRadio = document.querySelector(".topup:checked") ; // * my top-up options
@@ -75,7 +76,16 @@ function topupBtnClicked(){
         if(topUpRadio.value != "advance"){
             electricity.topUpElectricity(Number(topUpRadio.value)) ;
         }else{
+            if( electricity.advanceTaken() ){
+                debtError.style.display = "block"
+                setTimeout(function(){
+                    debtError.style.display = "none"
+                }, 3000)
+            }
             electricity.topUpElectricity(topUpRadio.value) ;
+
+          
+            
         }
  
     }else{
